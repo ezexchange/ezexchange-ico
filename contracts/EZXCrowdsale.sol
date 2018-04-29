@@ -44,7 +44,6 @@ contract ERC20 {
     event Approval(address indexed owner, address indexed spender, uint value);
 }
 
-
 contract EZExchange is ERC20 {
     using SafeMath for uint256;
     // Name of the token
@@ -92,6 +91,7 @@ contract EZExchange is ERC20 {
         PAUSED,
         ENDED
     }
+    
     Stages public stage;
     
     modifier atStage(Stages _stage) {
@@ -112,7 +112,7 @@ contract EZExchange is ERC20 {
         priceFactor = EtherPriceFactor;
         emit  Transfer(0, owner, balances[owner]);
     }
-  
+
     function setpricefactor(uint256 newPricefactor) external onlyOwner {
         priceFactor = newPricefactor;
     }
@@ -146,7 +146,6 @@ contract EZExchange is ERC20 {
         return bon;
     }
     
-  
     function start_PREICO() public onlyOwner atStage(Stages.NOTSTARTED) {
         stage = Stages.PREICO;
         stopped = false;
@@ -186,7 +185,7 @@ contract EZExchange is ERC20 {
         stage = Stages.ICO3;
         stopped = false;
         maxCap_ICO3 = 25000000 * 10 **18;       // 25 million
-        balances[address(this)] = (balances[address(this)]).add(maxCap_ICO3) ;
+        balances[address(this)] = (balances[address(this)]).add(maxCap_ICO3);
         ico3_startdate = now;
         ico3_enddate = now + 7 days;
         emit Transfer(0, address(this), maxCap_ICO3);
@@ -197,7 +196,7 @@ contract EZExchange is ERC20 {
         stage = Stages.ICO4;
         stopped = false;
         maxCap_ICO4 = 25000000 * 10 **18;           // 25 million
-        balances[address(this)] = (balances[address(this)]).add(maxCap_ICO4) ;
+        balances[address(this)] = (balances[address(this)]).add(maxCap_ICO4);
         ico4_startdate = now;
         ico4_enddate = now + 7 days;
         emit Transfer(0, address(this),maxCap_ICO4);
@@ -218,7 +217,7 @@ contract EZExchange is ERC20 {
         stage = Stages.ENDED;
         _totalsupply = (_totalsupply).sub(balances[address(this)]);
         balances[address(this)] = 0;
-        emit Transfer(address(this), 0 , balances[address(this)]);
+        emit Transfer(address(this), 0, balances[address(this)]);
     }
     
     // what is the total supply of the ech tokens?
