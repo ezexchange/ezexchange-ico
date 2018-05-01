@@ -104,7 +104,7 @@ contract EZExchange is ERC20 {
         _;
     }
     
-    function EZExchange(uint256 EtherPriceFactor) public {
+    constructor (uint256 EtherPriceFactor) public {
         require(EtherPriceFactor != 0);
         owner = msg.sender;
         balances[owner] = 80000000 * 10 ** 18;       // 80 million to owner
